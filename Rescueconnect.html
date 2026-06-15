@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RescueConnect</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+header{
+background:#d32f2f;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+width:90%;
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+margin-bottom:15px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+background:#d32f2f;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:5px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#b71c1c;
+}
+
+.alert{
+background:#fff3cd;
+padding:10px;
+border-left:5px solid orange;
+margin:10px 0;
+border-radius:5px;
+}
+
+.stats{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.box{
+flex:1;
+background:#eee;
+padding:15px;
+border-radius:8px;
+text-align:center;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+table th,table td{
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+}
+
+.pending{
+color:red;
+font-weight:bold;
+}
+
+.success{
+color:green;
+font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🚨 RescueConnect</h1>
+<p>Disaster Response & Emergency Assistance Platform</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Disaster Alerts</h2>
+
+<div class="alert">
+⚠ Flood Warning: Stay away from rivers and low-lying areas.
+</div>
+
+<div class="alert">
+⚠ Heavy Rain Alert: Emergency teams on standby.
+</div>
+
+</div>
+
+<div class="card">
+<h2>Send SOS Request</h2>
+
+<input type="text" id="name" placeholder="Your Name">
+
+<input type="text" id="location" placeholder="Location">
+
+<select id="emergency">
+<option>Flood</option>
+<option>Fire</option>
+<option>Earthquake</option>
+<option>Medical</option>
+</select>
+
+<button onclick="sendSOS()">Send SOS</button>
+
+<p id="sosMessage"></p>
+</div>
+
+<div class="card">
+<h2>Volunteer Registration</h2>
+
+<input type="text" id="vname" placeholder="Volunteer Name">
+
+<select id="skill">
+<option>Medical Aid</option>
+<option>Food Supply</option>
+<option>Rescue Support</option>
+</select>
+
+<button onclick="registerVolunteer()">Register</button>
+
+<p id="volunteerMessage"></p>
+</div>
+
+<div class="card">
+<h2>Dashboard</h2>
+
+<div class="stats">
+<div class="box">
+<h3 id="totalSOS">0</h3>
+<p>Total SOS</p>
+</div>
+
+<div class="box">
+<h3 id="totalVolunteers">0</h3>
+<p>Volunteers</p>
+</div>
+</div>
+
+<h3 style="margin-top:20px;">Emergency Requests</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Location</th>
+<th>Emergency</th>
+</tr>
+</thead>
+
+<tbody id="requestTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+let sosCount = 0;
+let volunteerCount = 0;
+
+function sendSOS(){
+
+let name = document.getElementById("name").value;
+let location = document.getElementById("location").value;
+let emergency = document.getElementById("emergency").value;
+
+if(name==="" || location===""){
+alert("Please fill all fields");
+return;
+}
+
+sosCount++;
+
+document.getElementById("totalSOS").innerText = sosCount;
+
+let row = `
+<tr>
+<td>${name}</td>
+<td>${location}</td>
+<td>${emergency}</td>
+<td class="pending">Pending</td>
+</tr>
+`;
+
+document.getElementById("requestTable").innerHTML += row;
+
+document.getElementById("sosMessage").innerHTML =
+"<span class='success'>SOS Request Sent Successfully!</span>";
+
+document.getElementById("name").value="";
+document.getElementById("location").value="";
+}
+
+function registerVolunteer(){
+
+let name = document.getElementById("vname").value;
+let skill = document.getElementById("skill").value;
+
+if(name===""){
+alert("Enter volunteer name");
+return;
+}
+
+volunteerCount++;
+
+document.getElementById("totalVolunteers").innerText = volunteerCount;
+
+document.getElementById("volunteerMessage").innerHTML =
+"<span class='success'>" + name + " registered for " + skill + "</span>";
+
+document.getElementById("vname").value="";
+}
+
+</script>
+
+</body>
+</html>

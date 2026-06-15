@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindCare</title>
+
+<style>
+body{
+    font-family: Arial,sans-serif;
+    background:#f4f8ff;
+    margin:0;
+}
+
+header{
+    background:#4a6cf7;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin:15px 0;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    background:#4a6cf7;
+    color:white;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+}
+
+#chatBox{
+    height:150px;
+    border:1px solid #ddd;
+    padding:10px;
+    overflow-y:auto;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>MindCare</h1>
+<p>Mental Wellness Support Platform</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Mood Tracker</h2>
+<button onclick="setMood('Happy 😊')">Happy</button>
+<button onclick="setMood('Neutral 😐')">Neutral</button>
+<button onclick="setMood('Sad 😔')">Sad</button>
+
+<p id="moodResult">Select your mood</p>
+</div>
+
+<div class="card">
+<h2>Stress Assessment Quiz</h2>
+
+<p>Are you feeling stressed today?</p>
+
+<button onclick="quiz('Yes')">Yes</button>
+<button onclick="quiz('No')">No</button>
+
+<p id="quizResult"></p>
+</div>
+
+<div class="card">
+<h2>Wellness Tip</h2>
+<p id="tip"></p>
+</div>
+
+<div class="card">
+<h2>AI Chatbot</h2>
+
+<div id="chatBox"></div>
+
+<input type="text" id="userInput"
+placeholder="Type your message">
+
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+<h1 align = "center"> MENTAL HELPLINE NUMBER (GOVT) - 14416 </h1>
+<script>
+
+function setMood(mood){
+document.getElementById("moodResult").innerText =
+"Current Mood: " + mood;
+}
+
+function quiz(ans){
+if(ans==="Yes"){
+document.getElementById("quizResult").innerText =
+"Take a short break and practice deep breathing.";
+}
+else{
+document.getElementById("quizResult").innerText =
+"Great! Keep maintaining a healthy routine.";
+}
+}
+
+const tips = [
+"Drink enough water.",
+"Take regular breaks.",
+"Sleep 7-8 hours daily.",
+"Exercise for at least 20 minutes.",
+"Talk to someone you trust."
+];
+
+document.getElementById("tip").innerText =
+tips[Math.floor(Math.random()*tips.length)];
+
+function sendMessage(){
+
+let input =
+document.getElementById("userInput");
+
+let msg = input.value;
+
+if(msg==="") return;
+
+let chat =
+document.getElementById("chatBox");
+
+chat.innerHTML +=
+"<p><b>You:</b> "+msg+"</p>";
+
+chat.innerHTML +=
+"<p><b>MindCare:</b> I understand. Try relaxing, taking breaks, and talking to supportive people.</p>";
+
+input.value="";
+}
+
+</script>
+
+</body>
+</html>
